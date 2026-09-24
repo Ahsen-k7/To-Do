@@ -14,7 +14,7 @@ export function SiteHeader() {
       </nav>
       <div className={styles.headerActions}>
         <Button variant="text">Log in</Button>
-        <Button arrow>Register</Button>
+        <Button href="/register" arrow>Register</Button>
       </div>
     </header>
   );

@@ -8,7 +8,7 @@ export function CallToAction() {
       <p className={styles.sectionEyebrow}>ONE SMALL STEP STARTS IT ALL</p>
       <h2 id="cta-title">Make room for a better day.</h2>
       <p>Your tasks, your goals, your little victories. All in one place.</p>
-      <Button variant="light" arrow>Register for TaskFlow</Button>
+      <Button href="/register" variant="light" arrow>Register for TaskFlow</Button>
       <span className={styles.ctaDecoration} aria-hidden="true">&#10022;</span>
     </section>
   );

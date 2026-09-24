@@ -16,7 +16,7 @@ export function HeroSection() {
         </h1>
         <p className={styles.heroDescription}>Big plans or everyday little things. Bring it all together in one calm space, and make progress at your own pace.</p>
         <div className={styles.heroActions}>
-          <Button size="large" arrow>Get started</Button>
+          <Button href="/register" size="large" arrow>Get started</Button>
           <a href="#preview" className={styles.textLink}>Take a look around <span>&#8599;</span>
           </a>
         </div>
