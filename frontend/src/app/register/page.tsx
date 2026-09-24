@@ -35,7 +35,7 @@ export default function RegisterPage() {
           <h2 id="register-title">Make yourself at home.</h2>
           <p className={styles.intro}>Create an account. Give your day a little direction.</p>
           <RegisterForm />
-          <p className={styles.loginPrompt}>Already have an account? <button type="button" disabled title="Login page coming next">Log in <span>(coming soon)</span></button></p>
+          <p className={styles.loginPrompt}>Already have an account? <Link href="/login">Log in</Link></p>
         </section>
       </main>
       <footer className={styles.footer}>A little less chaos. A little more flow.</footer>

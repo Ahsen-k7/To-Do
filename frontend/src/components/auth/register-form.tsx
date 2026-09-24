@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { apiRequest } from "@/lib/api";
 import { Icon } from "@/components/ui/icon";
 import styles from "./auth.module.css";
 
@@ -11,10 +12,13 @@ export function RegisterForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [requestError, setRequestError] = useState("");
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (pending) return;
+    setRequestError("");
     const form = event.currentTarget;
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
@@ -30,13 +34,23 @@ export function RegisterForm() {
     else if (confirmPassword !== password) next.confirmPassword = "Your passwords don’t match.";
 
     setErrors(next);
-    setValidated(Object.keys(next).length === 0);
     const firstInvalid = Object.keys(next)[0];
-    if (firstInvalid) (form.elements.namedItem(firstInvalid) as HTMLInputElement)?.focus();
+    if (firstInvalid) {
+      (form.elements.namedItem(firstInvalid) as HTMLInputElement)?.focus();
+      return;
+    }
+    setPending(true);
+    try {
+      await apiRequest("/auth/register", { name, email, password });
+      window.location.replace("/login?registered=1");
+    } catch (error) {
+      setRequestError(error instanceof Error ? error.message : "Please try again.");
+      setPending(false);
+    }
   }
 
   return (
-    <form className={styles.form} noValidate onSubmit={submit} onChange={() => setValidated(false)}>
+    <form className={styles.form} noValidate onSubmit={submit} onChange={() => setRequestError("")}>
       <div className={styles.field}>
         <label htmlFor="name">Full name</label>
         <input id="name" name="name" autoComplete="name" placeholder="Your name" maxLength={100} required aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} />
@@ -64,10 +78,9 @@ export function RegisterForm() {
         </div>
         {errors.confirmPassword && <p id="confirm-error" className={styles.error}>{errors.confirmPassword}</p>}
       </div>
-      <button type="submit" className={styles.submit}>Create account <Icon name="arrow" /></button>
-      <p className={styles.previewNotice}>Preview only — account creation will be available soon.</p>
+      <button type="submit" className={styles.submit} disabled={pending}>{pending ? "Creating account..." : "Create account"} <Icon name="arrow" /></button>
       <div aria-live="polite" role="status">
-        {validated && <p className={styles.success}><Icon name="check" /> Your details look good. No account has been created yet.</p>}
+        {requestError && <p className={styles.error} role="alert">{requestError}</p>}
       </div>
     </form>
   );

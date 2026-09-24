@@ -21,6 +21,13 @@
 .storyFooter { margin-top: auto; font-size: 10px; color: #869478; display: flex; gap: 7px; align-items: center; }
 .storyFooter svg { width: 13px; height: 13px; }
 .formPanel { padding: 48px 46px 36px; }
+.loginHeader { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #e8ecdf; }
+.loginMain { width: min(420px, calc(100% - 36px)); margin: 32px auto; }
+.loginCard { padding: 30px; background: #fffefa; border: 1px solid #e2e7db; border-radius: 14px; box-shadow: 0 8px 24px #30492b04; }
+.loginCard h1 { margin: 0 0 8px; font-size: 26px; font-weight: 550; line-height: 1.25; letter-spacing: -.8px; }
+.loginCard .intro { margin-bottom: 24px; }
+.loginCard .loginPrompt { border-top: 1px solid #edf0e5; padding-top: 10px; margin-top: 4px; }
+@media (max-width: 540px) { .loginHeader { padding: 8px 18px; }.loginMain { margin-block: 20px; }.loginCard { padding: 24px 20px; } }
 .formPanel h2 { font-size: 28px; font-weight: 500; letter-spacing: -1px; line-height: 1.25; margin: 14px 0 10px; }
 .intro { color: #858c7d; font-size: 12px; line-height: 1.7; margin: 0 0 28px; }
 .form { display: grid; gap: 18px; }
@@ -38,13 +45,19 @@
 .error { color: #a34332; }
 .submit { height: 44px; display: flex; justify-content: center; align-items: center; gap: 12px; border: 0; border-radius: 7px; background: #285b46; color: white; font: inherit; font-size: 12px; font-weight: 550; margin-top: 3px; cursor: pointer; transition: background .15s; }
 .submit:hover { background: #194a36; }
+.submit:disabled, .logout:disabled { cursor: wait; opacity: .65; }
+.logout { min-height: 40px; padding: 8px 16px; border: 1px solid #d7dfd0; border-radius: 7px; background: #fffefa; color: #285b46; font: inherit; font-size: 12px; cursor: pointer; }
+.logout:hover { background: #edf1e7; }
+.dashboard { max-width: 1080px; margin: 38px auto; padding: 0 24px; }
+.dashboard h1 { font-size: clamp(26px, 4vw, 36px); letter-spacing: -1px; font-weight: 500; margin: 12px 0; overflow-wrap: anywhere; }
+.dashboard > p { color: #7d8871; font-size: 14px; }
 .submit svg { width: 15px; height: 15px; }
 .previewNotice { text-align: center; color: #8a927e; font-size: 10px; margin: -6px 0 0; line-height: 1.6; }
 .success { display: flex; align-items: flex-start; gap: 8px; padding: 12px; margin: 0; font-size: 11px; line-height: 1.6; color: #49623c; background: #edf3e7; border-radius: 7px; }
 .success svg { flex-shrink: 0; width: 16px; height: 16px; }
 .loginPrompt { text-align: center; font-size: 11px; color: #8b947f; margin: 7px 0 0; }
-.loginPrompt button { border: none; background: none; padding: 8px 3px; font: inherit; color: #6e8163; }
-.loginPrompt button span { font-size: 9px; color: #9aA28e; }
+.loginPrompt a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 3px; font-weight: 550; color: #45663b; }
+.loginPrompt a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .footer { text-align: center; font-size: 11px; color: #939b87; padding: 0 20px 30px; }
 .page :is(a, button):focus-visible { outline: 2px solid #a4885c; outline-offset: 4px; }
 @media (max-width: 1120px) { .main { margin-inline: 30px; }.story, .formPanel { padding-inline: 32px; } }

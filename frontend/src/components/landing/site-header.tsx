@@ -13,7 +13,7 @@ export function SiteHeader() {
         <a href="#how-it-works">How it works</a>
       </nav>
       <div className={styles.headerActions}>
-        <Button variant="text">Log in</Button>
+        <Button href="/login" variant="text">Log in</Button>
         <Button href="/register" arrow>Register</Button>
       </div>
     </header>
